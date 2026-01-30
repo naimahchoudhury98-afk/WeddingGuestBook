@@ -2,7 +2,7 @@
 
 What requirements did you achieve?
 
-I achieved a working full stack guestbook with a Vite client and an Express server. I created GET and POST routes to retrieve and store messages in a Supabase PostgreSQL database. I also ensured the form submits data correctly and the layout works on different screen sizes using responsive design and a media query. I seeded the database with realistic dummy data for testing.
+I achieved a working full stack guestbook with a Vite client and an Express server. I created GET and POST routes to retrieve and store messages in a Supabase PostgreSQL database. I also ensured the form submits data correctly and the layout works on different screen sizes using responsive design and a media query. .
 
 Were there any requirements or goals you were unable to achieve?
 
