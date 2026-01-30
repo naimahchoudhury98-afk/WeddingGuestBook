@@ -1,57 +1,64 @@
-const display = document.getElementById('app')
-const form = document.getElementById('form')
+const display = document.getElementById("app")
+const form = document.getElementById("form")
 
-
-async function fetchData() {
-  const response = await fetch(`http://localhost:4242/guestbook`)
+async function fetchMessages() {
+  const response = await fetch("http://localhost:4242/guestbook")
   const messages = await response.json()
-
-  console.log(messages)
-
   return messages
 }
 
-
-
 async function displayMessages() {
-  const messages = await fetchData()
+  display.innerHTML = ""
+
+  const messages = await fetchMessages()
 
   messages.forEach((message) => {
-    const entry = document.createElement('div')
+    const entry = document.createElement("div")
     entry.className = "entry"
-    const userName = document.createElement('p')
+
+    const userName = document.createElement("p")
     userName.className = "entry-name"
-
-    const messageContent = document.createElement('p')
-    messageContent.className = "entry-message"
-
-
     userName.textContent = message.guest_name
+
+    const messageContent = document.createElement("p")
+    messageContent.className = "entry-message"
     messageContent.textContent = message.content
 
-    entry.append(userName, messageContent)
+    const deleteButton = document.createElement("button")
+    deleteButton.className = "delete-button"
+    deleteButton.textContent = "Delete"
 
+    deleteButton.addEventListener("click", async () => {
+      await fetch(`http://localhost:4242/guestbook/${message.id}`, {
+        method: "DELETE"
+      })
+
+      displayMessages()
+    })
+
+    entry.append(userName, messageContent, deleteButton)
     display.appendChild(entry)
   })
 }
-displayMessages()
 
+displayMessages()
 
 async function handleSubmit(event) {
   event.preventDefault()
 
   const formData = new FormData(form)
   const userInput = Object.fromEntries(formData)
-  const userInputJSON = JSON.stringify(userInput)
 
-  const response = await fetch(`http://localhost:4242/guestbook`, {
-    headers: {
-      "Content-Type" : "application/json"
-    },
+  await fetch("http://localhost:4242/guestbook", {
     method: "POST",
-    body: userInputJSON
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userInput)
   })
-  window.location.reload()
-} 
 
-form.addEventListener('submit', handleSubmit)
+  form.reset()
+  displayMessages()
+}
+
+form.addEventListener("submit", handleSubmit)

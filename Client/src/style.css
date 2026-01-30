@@ -4,10 +4,28 @@ main {
   padding: 16px;
 }
 
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background-image: url("/wedding-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #222;
+  
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.404);
+  z-index: -1;
+}
 
 
 .entry {
-  background: rgb(238, 229, 187);
+  background: rgb(207, 189, 201);
   padding: 12px;
   margin-bottom: 12px;
   border-radius: 8px;
@@ -39,7 +57,7 @@ main {
 
 #form input {
   padding: 12px;
-  border: 1px solid #414504;
+  border: 1px solid #0d0506;
   border-radius: 8px;
   font-size: 16px;
 }
@@ -53,4 +71,56 @@ main {
   font-family: arial;
 }
 
+#form button:hover {
+  opacity: 0.3;
+}
+
+h1 {
+  text-align: center;
+  font-size: 54px;
+
+}
+
+h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  text-align: center;
+
+}
+
+.delete-button {
+  margin-top: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  color: red;
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .entry {
+    padding: 10px;
+  }
+
+  #form input,
+  #form button {
+    font-size: 14px;
+  }
+}
+
+.form-section {
+  background: rgba(203, 180, 197, 0.721);
+  padding: 20px;
+  border-radius: 16px;
+
+}
 
